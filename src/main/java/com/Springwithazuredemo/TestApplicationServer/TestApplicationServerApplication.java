@@ -1,20 +1,27 @@
 package com.Springwithazuredemo.TestApplicationServer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @SpringBootApplication
 @RestController
 public class TestApplicationServerApplication {
-	@GetMapping("/test")
-	public String checkDeployment(){
-		return "Deployment Successful";
+	@Autowired
+	private EmployeRepo employeRepo;
+	@PostMapping("/add")
+	public Employe addNewEmploye(@RequestBody Employe employe){
+		return employeRepo.save(employe);
 	}
-	@GetMapping("/test2")
-	public String sayHello(){
-		return "Hello World";
+	@GetMapping("/getAll")
+	public List<Employe> getAllEmployes(){
+		return employeRepo.findAll();
 	}
 	public static void main(String[] args) {
 		SpringApplication.run(TestApplicationServerApplication.class, args);
