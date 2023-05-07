@@ -12,7 +12,10 @@ public class TestApplicationServerApplication {
 	public String checkDeployment(){
 		return "Deployment Successful";
 	}
-
+	@GetMapping("/test2")
+	public String sayHello(){
+		return "Hello World";
+	}
 	public static void main(String[] args) {
 		SpringApplication.run(TestApplicationServerApplication.class, args);
 	}
